@@ -9,3 +9,7 @@
 /parameters/
 *.tar
 ../parameters/
+../declare/
+/declare/
+../saved_images/
+/saved_images/
