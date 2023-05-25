@@ -121,6 +121,8 @@ def check_accuracy(loader, model, device="cuda"):
     # 启用 Batch Normalization 和 Dropout
     model.train()
 
+    return num_correct / num_pixels * 100,dice_score / len(loader),iou_score / len(loader)
+
 
 # 保存预测影像结果
 def save_predictions(loader, model, folder="./saved_images/", device="cuda"):
