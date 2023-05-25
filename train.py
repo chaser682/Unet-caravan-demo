@@ -41,7 +41,7 @@ lr取值适合1e-3,1e-4,1e-5,1e-6
 lr = 0.000001  # 学习率
 device = "cuda" if torch.cuda.is_available() else "cpu"  # 在gpu上训练
 batch_size = 4  # 批处理大小
-epochs = 1  # 训练的次数
+epochs = 3  # 训练的次数
 num_workers = 1  # 工作线程数
 # 图片尺寸
 image_height = 224
@@ -145,11 +145,24 @@ def loss_lr_curve(loader, model, optimizer, loss_fn):
     plt.plot(logs[10:], losses[10:])
     plt.show()
 
-
+#损失函数随着训练批次的变化
 def loss_curve(losses):
     plt.xlabel("epochs")
     plt.ylabel("loss")
     plt.plot(losses)
+    plt.show()
+
+#准确率、dice分数、iou分数随着训练次数的变化
+def evaluation_curve(accuracy,dice,iou):
+
+    plt.figure(figsize=(5, 2.7), layout='constrained')
+    plt.plot(accuracy, label='accuracy')
+    plt.plot(dice, label='dice')
+    plt.plot(iou, label='iou')
+    plt.xlabel('epochs')
+    plt.ylabel('score')
+    plt.title("evaluation curve")
+    plt.legend()
     plt.show()
 
 
@@ -214,6 +227,10 @@ def main():
 
     #损失值列表
     losses = []
+    #准确率、dice分数、iou分数
+    accuracy = []
+    dice = []
+    iou = []
 
     # 训练模型，训练次数为epochs
     for epoch in range(epochs):
@@ -227,7 +244,11 @@ def main():
         save_checkpoint(state=checkpoint, filename="./parameters/%fmy_checkpoint.pth.tar" % (lr,))
 
         # 检验模型的精度
-        check_accuracy(test_loader, model, device)
+        x,y,z = check_accuracy(test_loader, model, device)
+
+        accuracy.append(x.cpu())
+        dice.append(y.cpu())
+        iou.append(z.cpu())
 
         # 可持久化存储，保存预测影像
         save_predictions(test_loader, model, folder="./saved_images/", device=device)
@@ -237,6 +258,9 @@ def main():
 
     # 画出损失函数与训练次数之间的曲线
     loss_curve(losses)
+
+    #绘制评估曲线
+    evaluation_curve(accuracy,dice,iou)
 
 
 
