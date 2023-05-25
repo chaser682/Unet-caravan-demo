@@ -120,5 +120,6 @@ python train.py
 
 ## update
 如果对该项目有疑问，可以创建issue
+目前数据集还没上传
 
 
