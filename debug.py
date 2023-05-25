@@ -74,4 +74,12 @@
 '''图像分割评价指标'''
 
 
-print('a\nb')
+# print('a\nb')
+
+from train import evaluation_curve
+
+a = [95.651878,95.933640,95.941444]
+b = [90.1212,90.41232,90.141234]
+c = [83.12312,82.123124,84.21312]
+
+evaluation_curve(a,b,c)

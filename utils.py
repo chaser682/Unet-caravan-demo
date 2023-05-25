@@ -115,13 +115,13 @@ def check_accuracy(loader, model, device="cuda"):
             iou_score += (1.0 * (preds & y).sum() + smooth) / ((preds | y).sum() + smooth)
 
     print("The accuracy of the Unet is %.6f" % (num_correct / num_pixels * 100))
-    print("Dice score : %.6f" % (dice_score / len(loader)))
-    print("IOU score : %.6f" % (iou_score / len(loader)))
+    print("Dice score : %.6f" % (dice_score / len(loader)*100))
+    print("IOU score : %.6f" % (iou_score / len(loader)*100))
 
     # 启用 Batch Normalization 和 Dropout
     model.train()
 
-    return num_correct / num_pixels * 100,dice_score / len(loader),iou_score / len(loader)
+    return num_correct / num_pixels * 100,dice_score / len(loader)*100,iou_score / len(loader)*100
 
 
 # 保存预测影像结果

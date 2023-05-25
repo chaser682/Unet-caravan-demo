@@ -155,14 +155,14 @@ def loss_curve(losses):
 #准确率、dice分数、iou分数随着训练次数的变化
 def evaluation_curve(accuracy,dice,iou):
 
-    plt.figure(figsize=(5, 2.7), layout='constrained')
-    plt.plot(accuracy, label='accuracy')
-    plt.plot(dice, label='dice')
-    plt.plot(iou, label='iou')
-    plt.xlabel('epochs')
-    plt.ylabel('score')
-    plt.title("evaluation curve")
-    plt.legend()
+    fig, ax = plt.subplots()  # 创建图实例
+    ax.plot(accuracy, label='accuracy')
+    ax.plot(dice, label='dice')
+    ax.plot(iou, label='iou')
+    ax.set_xlabel('epochs')
+    ax.set_ylabel('score')
+    ax.set_title("evaluation curve")
+    ax.legend()
     plt.show()
 
 
