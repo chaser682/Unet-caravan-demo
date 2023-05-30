@@ -13,3 +13,5 @@
 /declare/
 ../saved_images/
 /saved_images/
+../__pycache__/
+/__pycache__/

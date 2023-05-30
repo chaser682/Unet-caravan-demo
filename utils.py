@@ -20,8 +20,6 @@ from PIL import Image
 from dataload import CarDataset
 from torch.utils.data import DataLoader
 import os
-
-
 # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # print(device)
